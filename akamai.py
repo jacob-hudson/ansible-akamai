@@ -16,6 +16,12 @@ EXAMPLES = ''' examples '''
 def main():
 
     fields = {
+        "host": {"required": False, "type": "str"},
+        "access_token": {"required": False, "type": "str"},
+        "client_token": {"required": False, "type": "str"},
+        "client_secret": {"required": False, "type": "str"},
+        "endpoint": {"required": True, "type": "str"},
+        "method": {"required": True, "type": "str"}
     }
 
     module = AnsibleModule(argument_spec=fields)
