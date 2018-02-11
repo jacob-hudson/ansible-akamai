@@ -1,6 +1,9 @@
 # ansible-akamai
 Ansible Module for working with Akamai OPEN APIIs
 
+# Prerequisites
+- Edgegrid-Python (install with `pip install edgegrid python`), works with Python 2.7+
+
 # Install
 Drop `akamai.py` into `./library` in any Ansible playbook, then invoke it like any standard module
 
