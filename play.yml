@@ -1,0 +1,7 @@
+- hosts: localhost
+  tasks:
+   - name: Basic GET call
+     akamai:
+       section: default
+       endpoint: 	/papi/v1/groups
+       method: GET
