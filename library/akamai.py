@@ -5,6 +5,7 @@ import json
 import requests
 import os
 from config import EdgeGridConfig
+from urlparse import urljoin
 try:
     from akamai.edgegrid import EdgeGridAuth
 except ImportError:
@@ -37,9 +38,9 @@ def authenticate(params):
     baseurl = config.host
 
     if params["method"] == "GET":
-        get_call():
+        session.get(urljoin(baseurl, endpoint))
     elif params["method"] == "POST":
-        post_call()
+        session.post()
     else:
         # error
 
