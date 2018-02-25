@@ -7,9 +7,7 @@ import os
 try:
     from akamai.edgegrid import EdgeGridAuth
 except ImportError:
-    print "Attemping to install required library: edgegrid-python using Pip in your System Path"
-    print "pip install edgegrid-python"
-    os.system("pip install edgegrid-python")
+    print "Please install `edgegrid-python` using pip"
 from os.path import expanduser
 import re
 from urlparse import urljoin
