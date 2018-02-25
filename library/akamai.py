@@ -10,33 +10,96 @@ except ImportError:
     print "Attemping to install required library: edgegrid-python using Pip in your System Path"
     print "pip install edgegrid-python"
     os.system("pip install edgegrid-python")
-from config import EdgeGridConfig
+from os.path import expanduser
+import re
 from urlparse import urljoin
 
 
 DOCUMENTATION = ''' docs '''
 EXAMPLES = ''' examples '''
 
+def extract_creds(section):
+    home = expanduser("~")
+
+    host = ""
+    client_secret = ""
+    client_token = ""
+    access_token = ""
+    i = -1
+    edgerc_file = open(home + '/.edgerc')
+
+    for line in edgerc_file:
+        # this is needed to deal with client_secret not getting populated
+        if "client_secret" in line:
+            if ":" in line:
+                tmp = line.split(':')
+                client_secret = tmp[1].strip()
+            elif re.match(r'...=...', line):
+                tmp = line.split('=')
+                client_secret = tmp[1].strip()
+
+        # getting the section we want
+        if section in line and i == -1:
+            i = 10
+        elif i >= 10:
+            i = i + 1
+        else:
+            i = -1
+
+        if i == 14:
+            break
+
+        if "client_secret" in line:
+            if ":" in line:
+                tmp = line.split(':')
+                client_secret = tmp[1].strip()
+            elif re.match(r'...=...', line):
+                tmp = line.split('=')
+                client_secret = tmp[1].strip()
+
+        if "host" in line:
+            if ":" in line:
+                tmp = line.split(':')
+                host = tmp[1].strip()
+            elif re.match(r'...=...', line):
+                tmp = line.split('=')
+                host = tmp[1].strip()
+
+        if "client_token" in line:
+            if ":" in line:
+                tmp = line.split(':')
+                client_token = tmp[1].strip()
+            elif re.match(r'...=...', line):
+                tmp = line.split('=')
+                client_token = tmp[1].strip()
+
+        if "access_token" in line:
+            if ":" in line:
+                tmp = line.split(':')
+                access_token = tmp[1].strip()
+            elif re.match(r'...=...', line):
+                tmp = line.split('=')
+                access_token = tmp[1].strip()
+
+    return host, client_secret, client_token, access_token
+
 def authenticate(params):
     session = requests.Session()
-    config = EdgeGridConfig({},params["section"])
-    if hasattr(config, "debug") and config.debug:
-	       debug = True
-
-    if hasattr(config, "verbose") and config.verbose:
-	       verbose = True
+    host, client_secret, client_token, access_token = extract_creds(params["section"])
 
      # set the config options
     session.auth = EdgeGridAuth(
-        client_token=config.client_token,
-        client_secret=config.client_secret,
-        access_token=config.access_token
+        client_token=client_token,
+        client_secret=client_secret,
+        access_token=access_token
         )
 
-    baseurl = config.host
+    baseurl = "https://" + host
+    endpoint = params["endpoint"]
 
     if params["method"] == "GET":
-        session.get(urljoin(baseurl, endpoint))
+        response = session.get(urljoin(baseurl, endpoint))
+        return False, False, response.json()
     elif params["method"] == "POST":
         session.post()
     else: #error
