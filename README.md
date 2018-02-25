@@ -6,7 +6,7 @@ Ansible Module for working with Akamai OPEN APIs
 - Edgegrid-Python (install with `pip install edgegrid-python`), works with Python 2.7.10+
 
 # Install
-- Drop `akamai.py` and `config.py` into `./library` in any Ansible playbook, then invoke it like any standard module
+- Drop `akamai.py` into `./library` in any Ansible playbook, then invoke it like any standard module
 
 # Credentials
 - Akamai OPEN credentials are required to use this module.  A reference to get the credentials can be found here - [Get Credentials](https://developer.akamai.com/introduction/Prov_Creds.htm)
@@ -19,4 +19,4 @@ Ansible Module for working with Akamai OPEN APIs
 - `method` - GET or POST, similar to HTTPie and the Akamai CLI
 
 # Acknowledgements
-- `config.py` is from the Akamai Technologies [api-kickstart](https://github.com/akamai/api-kickstart) repository where many other Akamai API examples are available!
+- The Akamai Technologies [api-kickstart](https://github.com/akamai/api-kickstart) repository where many other Akamai API examples are available!
