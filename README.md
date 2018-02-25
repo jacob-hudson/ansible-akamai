@@ -1,5 +1,5 @@
 # ansible-akamai
-Ansible Module for working with Akamai OPEN APIIs
+Ansible Module for working with Akamai OPEN APIs
 
 # Prerequisites
 - Python 2.7.10+ (NOTE:  This is higher then Ansible, which can run on Python 2.6 - 2.7.9)
