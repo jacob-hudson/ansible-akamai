@@ -99,7 +99,10 @@ def authenticate(params):
 
     if params["method"] == "GET":
         response = session.get(urljoin(baseurl, endpoint))
-        return False, False, response.json()
+        if response.status_code != 400 and response.status_code != 404:
+            return False, False, response.json()
+        else:
+            return True, False, response.json()
     elif params["method"] == "POST":
         session.post()
     else: #error
