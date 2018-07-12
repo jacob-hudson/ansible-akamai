@@ -9,10 +9,8 @@ except ImportError:
 from os.path import expanduser
 from urlparse import urljoin
 
-
 DOCUMENTATION = ''' docs '''
 EXAMPLES = ''' examples '''
-
 
 def authenticate(params):
     # get home location
@@ -71,4 +69,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
