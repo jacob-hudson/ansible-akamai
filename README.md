@@ -17,6 +17,13 @@ Ansible Module for working with Akamai OPEN APIs
 - `section` - Section of `.edgerc` file
 - `endpoint` - API endpoint to hit
 - `method` - GET or POST, similar to HTTPie and the Akamai CLI
+- `body` - The request body that needs to used only for POST method
+    * "productId": "prd_Alta",
+    * "propertyName": "my.new.property.com",
+- `headers` - The request headers that needs to used only for POST method
+    * "Content-Type": "application/json"
+    * "PAPI-Use-Prefixes": "true"
 
 # Acknowledgements
 - The Akamai Technologies [api-kickstart](https://github.com/akamai/api-kickstart) repository where many other Akamai API examples are available!
+- The Akamai API Catalog: https://developer.akamai.com/api/
