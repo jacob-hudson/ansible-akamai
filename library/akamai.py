@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 from ansible.module_utils.basic import *
-import requests
-
+import requests, json
 try:
     from akamai.edgegrid import EdgeGridAuth, EdgeRc
 except ImportError:
@@ -12,7 +11,6 @@ from urlparse import urljoin
 
 DOCUMENTATION = ''' docs '''
 EXAMPLES = ''' examples '''
-
 
 def authenticate(params):
     # get home location
@@ -35,20 +33,28 @@ def authenticate(params):
     if params["method"] == "GET":
         response = s.get(urljoin(baseurl, endpoint))
         if response.status_code != 400 and response.status_code != 404:
-            return False, False, response.json()
+            print response.content
         else:
-            return True, False, response.json()
+            print response.content
     elif params["method"] == "POST":
-        s.post()
+
+        body = json.loads(params["body"])
+
+        headers = json.loads(params["headers"])
+
+        response = s.post(urljoin(baseurl, endpoint), json=body, headers=headers)
+        print response.content
     else:  # error
         pass
 
-
 def main():
+
     fields = {
         "section": {"required": True, "type": "str"},
         "endpoint": {"required": True, "type": "str"},
-        "method": {"required": True, "type": "str"}
+        "method": {"required": True, "type": "str"},
+        "body": {"required": False, "type": "str"},
+        "headers": {"required": False, "type": "str"},
     }
 
     module = AnsibleModule(argument_spec=fields)
