@@ -20,7 +20,7 @@ def authenticate(params):
     # extract edgerc properties
     edgerc = EdgeRc(filename)
 
-    # values from ansible 
+    # values from ansible
     endpoint = params["endpoint"]
     section = params["section"]
 
@@ -37,11 +37,8 @@ def authenticate(params):
         else:
             print response.content
     elif params["method"] == "POST":
-
         body = json.loads(params["body"])
-
         headers = json.loads(params["headers"])
-
         response = s.post(urljoin(baseurl, endpoint), json=body, headers=headers)
         print response.content
     else:  # error
