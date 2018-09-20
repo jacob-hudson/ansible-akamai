@@ -20,7 +20,6 @@ def get_request_file(json_file):
 
     return body
 
-
 def authenticate(params):
     # get home location
     home = expanduser("~")
@@ -53,6 +52,14 @@ def authenticate(params):
             return False, True, response.json()
         else:
             return True, False, response.json()
+    elif params["method"] == "PUT":
+        body = get_request_file(params["body"])
+        headers = {'content-type': 'application/json'}
+        response = s.put(urljoin(baseurl, endpoint), json=body, headers=headers)
+        if response.status_code != 400 and response.status_code != 404:
+            return False, True, response.json()
+        else:
+            return True, False, response.json()
     else:  # error
         pass
 
@@ -74,7 +81,6 @@ def main():
         module.exit_json(changed=has_changed, msg=result)
     else:
         module.fail_json(msg=result)
-
 
 if __name__ == "__main__":
     main()
