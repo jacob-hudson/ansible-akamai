@@ -11,7 +11,6 @@ Akamai authentication with `.edgerc` files.
 
 import json
 
-# import urllib.parse
 from urllib.parse import urljoin
 from os.path import expanduser
 
