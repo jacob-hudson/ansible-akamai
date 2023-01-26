@@ -3,7 +3,7 @@ Ansible module for working with Akamai OPEN APIs
 
 # Prerequisites
 - Python 3+
-- [Edgegrid-Python](https://github.com/akamai/AkamaiOPEN-edgegrid-python) (install with `pip install edgegrid-python`).
+- [edgegrid-python](https://github.com/akamai/AkamaiOPEN-edgegrid-python) (install with `pip install edgegrid-python`).
 
 # Install
 - Drop `akamai.py` into `./library` in any Ansible playbook, then invoke it like any standard module
@@ -33,9 +33,9 @@ The request headers that needs to used only for POST method
 ## Example JSON file for the body
 Example path `/my/json_request_file.json` in above `body:` argument:
 ```
-    {
-    "propertyName": "my.property.name"
-    }
+{
+"propertyName": "my.property.name"
+}
 ```
 
 # Acknowledgements
