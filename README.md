@@ -1,28 +1,42 @@
 # ansible-akamai
-Ansible Module for working with Akamai OPEN APIs
+Ansible module for working with Akamai OPEN APIs
 
 # Prerequisites
-- Python 2.7.10+ (NOTE:  This is higher then Ansible, which can run on Python 2.6 - 2.7.9)
-- Edgegrid-Python (install with `pip install edgegrid-python`), works with Python 2.7.10+
+- Python 3+
+- [edgegrid-python](https://github.com/akamai/AkamaiOPEN-edgegrid-python) (install with `pip install edgegrid-python`).
 
 # Install
 - Drop `akamai.py` into `./library` in any Ansible playbook, then invoke it like any standard module
 
 # Credentials
-- Akamai OPEN credentials are required to use this module.  A reference to get the credentials can be found here - [Get Credentials](https://developer.akamai.com/introduction/Prov_Creds.htm)
-
-- The currently supported method for storing credentials is via an `.edgerc` file, the recommended location to store the file is in the home directory
+- Akamai OPEN credentials are required to use this module.  A reference to get the credentials can be found here - [Get Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
+- The currently supported method for storing credentials is via an `.edgerc` file; the recommended location to store the file is in the home directory
 
 # Variables
-- `section` - Section of `.edgerc` file
-- `endpoint` - API endpoint to hit
-- `method` - GET or POST, similar to HTTPie and the Akamai CLI
-- `body` - The request body that needs to used only for POST method
-    * "productId": "prd_Alta",
-    * "propertyName": "my.new.property.com",
-- `headers` - The request headers that needs to used only for POST method
-    * "Content-Type": "application/json"
-    * "PAPI-Use-Prefixes": "true"
+    section: default
+Section header of `.edgerc` INI file used for authentication
+
+    endpoint: /papi/v1/search/find-by-value?=
+API endpoint to hit
+
+    method: POST
+PUT, GET or POST, similar to HTTPie and the Akamai CLI
+
+    body: /my/json_request_file.json
+The request body file that needs to used only for POST method.
+
+    headers:
+      Content-Type: application/json
+      PAPI-Use-Prefixes: true
+The request headers that needs to used only for POST method
+
+## Example JSON file for the body
+Example path `/my/json_request_file.json` in above `body:` argument:
+```
+{
+"propertyName": "my.property.name"
+}
+```
 
 # Acknowledgements
 - The Akamai Technologies [api-kickstart](https://github.com/akamai/api-kickstart) repository where many other Akamai API examples are available!
