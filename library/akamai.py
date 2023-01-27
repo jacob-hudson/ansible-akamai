@@ -165,8 +165,8 @@ def main():  # pylint: disable=missing-function-docstring
     fields = {
         "section": {"required": True, "type": "str"},
         "endpoint": {"required": True, "type": "str"},
-        "method": {"required": True, "type": "str"},
-        "body": {"required": False, "type": "str"},
+        "method": {"required": True, "type": "str", "choices": ["GET", "POST", "PUT"]},
+        "body": {"required": False, "type": "json"},
         "headers": {"required": False, "type": "str"}
     }
 
